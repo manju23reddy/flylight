@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "365477992747",
+    "firebase_url": "https://flylight-c052f.firebaseio.com",
+    "project_id": "flylight-c052f",
+    "storage_bucket": "flylight-c052f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365477992747:android:748aa0841e326875",
+        "android_client_info": {
+          "package_name": "com.manju.alex.flylight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365477992747-lafl4b7f0knqkkjj5goe689cr3esv9vq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5RwZotrPo2iJdA6ldv98a44mJGg-OWvs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/step_1_name"
+        android:gravity="center"
+        android:fontFamily="sans-serif"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_device_step1_desc"
+        android:fontFamily="sans-serif"
+        android:textSize="17sp"
+        android:layout_margin="15dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="@string/step_next"
+        android:layout_gravity="bottom|end"
+        android:textColor="@color/white"
+        android:id="@+id/btn_next_step"
+        android:fontFamily="sans-serif"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="@string/step_cancel"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom|start"
+        android:id="@+id/btn_cancel_step"
+        android:fontFamily="sans-serif"/>
+
+
+</FrameLayout>
