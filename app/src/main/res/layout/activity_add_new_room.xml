@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="10dp"
+    tools:context="com.manju.alex.flylight.ui.AddNewAreaActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/area_intro"
+        android:id="@+id/txt_add_device_intro"
+        android:fontFamily="sans-serif"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="center"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/lyt_add_area_details"
+        >
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            >
+
+            <EditText
+                android:id="@+id/edtxt_area_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/add_area_hint"
+                android:inputType="text"
+                android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:textColorHint="@android:color/white"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            >
+
+            <EditText
+                android:id="@+id/edtxt_area_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/add_area_desc_hint"
+                android:inputType="text"
+                android:textColor="@android:color/white"
+                android:maxLines="2"
+                android:textColorHint="@android:color/white"/>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rcv_devices_list"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_device_intro"
+        app:layout_constraintBottom_toTopOf="@+id/lyt_buttons"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        />
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/lyt_buttons">
+
+
+        <Button
+            android:id="@+id/btn_link_devices"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="@string/link_devices"
+            android:fontFamily="sans-serif"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            android:layout_margin="2dp"/>
+
+        <Button
+            android:id="@+id/btn_create_new_room"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@color/colorAccent"
+            android:text="@string/create_room"
+            android:fontFamily="sans-serif"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="@string/add_device_to_room"
+            android:id="@+id/btn_add_device_step"
+            android:fontFamily="sans-serif"
+            android:visibility="gone"
+            android:layout_margin="2dp"/>
+
+    </LinearLayout>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

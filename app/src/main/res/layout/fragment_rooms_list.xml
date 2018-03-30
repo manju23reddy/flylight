@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rcv_rooms_list"
+        android:layout_margin="10dip"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtv_no_rooms_message"
+        android:layout_centerInParent="true"
+        android:text="@string/no_rooms_message"
+        android:gravity="center"
+        android:textSize="17sp"
+        android:fontFamily="sans-serif"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_btn_add_new_room"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/add_plus_white"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:elevation="16dp"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>
