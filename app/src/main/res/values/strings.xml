@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">flylight</string>
+    <string name="app_name">FlyLight</string>
     <string name="title_activity_fly_light_login">FlyLightLoginActivity</string>
     <string name="registeration">Register</string>
     <string name="action_sign_in_short">Register</string>
@@ -33,6 +33,15 @@
     <string name="step_next"> Next > </string>
     <string name="step_cancel">Cancel</string>
 
+    <string name="no_devices_message">No Flylight devices added yet !</string>
+    <string name="no_rooms_message">No areas added yet !</string>
+    <string name="tab_devices">FlyLight Devices</string>
+    <string name="tab_areas">Areas</string>
+    <string name="empty_area_nam_err">Area name cannot be empty.</string>
+    <string name="empty_area_desc_err">Area description cannot be empty.</string>
+    <string name="failed_to_create_room_err">Unable to create room.</string>
+    <string name="link_device_to_room_msg">Link FlyLight device to room. Choose from existing list or add a new device.</string>
+
     <string name="step_1_name">
         Pairing your new FlyLight device
     </string>
@@ -54,6 +63,14 @@
         Configure
     </string>
 
+    <string name="add_device_title">New FlyLight Device</string>
+    <string name="new_area_title">New Area</string>
+
+    <string name="area_intro">Having areas will allow you to group multiple FlyLight devices together. Like Kitchen, Living room or a custom area with FlyLight devices from multiple areas. </string>
+
+    <string name="create_room">Create Room</string>
+    <string name="link_devices">Link Devices</string>
+
     <string name="step_3_name">Pairing FlyLight Device</string>
     <string name="add_device_step3_desc">
         Please wait.. your new FlyLight device is getting paired &amp; linked to your profile.
@@ -63,15 +80,16 @@
     <string name="add_device_step4_device_name">
         Device Name
     </string>
-    <string name="add_device_step4_device_description">
-        Device Area Name
+    <string name="device_name_step_4_msg">
+        Set Name for FlyLight Device
     </string>
     <string name="add_device_step4_device_image">
         Add a Picture of FlyLight device location (optional).
     </string>
 
-
-
+    <string name="add_area_hint">Area Name</string>
+    <string name="add_area_desc_hint">Area Description</string>
+    <string name="add_device_to_room">New Device</string>
 
 
     <string-array name="add_device_labels">
@@ -90,8 +108,8 @@
 
     </string-array>
 
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

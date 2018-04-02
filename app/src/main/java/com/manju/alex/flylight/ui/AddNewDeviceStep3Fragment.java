@@ -16,17 +16,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.manju.alex.flylight.BuildConfig;
 import com.manju.alex.flylight.R;
 import com.manju.alex.flylight.holder.DeviceHolder;
 import com.manju.alex.flylight.holder.NewDeviceInfoHolder;
+import com.manju.alex.flylight.holder.RoomHolder;
 
 import org.json.JSONObject;
 
@@ -44,7 +51,6 @@ public class AddNewDeviceStep3Fragment extends Fragment implements View.OnClickL
     private IAddDeviceStepTraverseCaller mCallBacks = null;
 
     EditText mDeviceName = null;
-    EditText mDeviceDescription = null;
     private Button mBtnConfigureDevice;
     private DeviceHolder mNewDeviceInfo;
     private DatabaseReference mDataBase;
@@ -84,7 +90,6 @@ public class AddNewDeviceStep3Fragment extends Fragment implements View.OnClickL
         mBtnConfigureDevice = view.findViewById(R.id.btn_configure_device);
 
         mDeviceName = view.findViewById(R.id.edtxt_device_name);
-        mDeviceDescription = view.findViewById(R.id.edtxt_device_desc);
 
         mBtnConfigureDevice.setOnClickListener(this);
 
@@ -100,33 +105,44 @@ public class AddNewDeviceStep3Fragment extends Fragment implements View.OnClickL
 
                 //Todo 2. after push is complete send the firebase project url, auth id and device node details to new device.
                 final String deviceName = mDeviceName.getText().toString();
-                final String deviceArea = mDeviceDescription.getText().toString();
 
                 if (TextUtils.isEmpty(deviceName)){
                     Toast.makeText(getContext(), "Device Name Cannot be Empty", Toast.LENGTH_LONG).show();
                     return;
                 }
-                else if(TextUtils.isEmpty(deviceArea)){
-
-                    Toast.makeText(getContext(), "Device Area Name Cannot be Empty", Toast.LENGTH_LONG).show();
-                    return;
-                }
                 else{
                     mNewDeviceInfo = new DeviceHolder();
                     mNewDeviceInfo.setDeviceName(deviceName);
-                    mNewDeviceInfo.setDeviceAreaRoom(deviceArea);
                     mNewDeviceInfo.setDeviceIntensity(0);
-
                     mNewDeviceInfo.setDeviceState(0);
 
-                    mDataBase.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("areas").child(deviceArea).child(mNewDeviceInfo.getDeviceName()).setValue(mNewDeviceInfo)
+                    /*DatabaseReference ref = mDataBase.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("devices");
+
+                    ref.push().child(mNewDeviceInfo.toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });*/
+
+                    mDataBase.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                            child("devices").child(mNewDeviceInfo.getDeviceName()).
+                            setValue(mNewDeviceInfo)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            String deviceKey = mDataBase.child(deviceArea).child(deviceName).getKey();
-                            new SenderUDPServer(BuildConfig.FB_PROJECT_URL,
-                                    BuildConfig.FB_PROJECT_DB_KEY, mNewDeviceInfo,
-                                    FirebaseAuth.getInstance().getCurrentUser().getUid()).start();
+
+
+                                new SenderUDPServer(BuildConfig.FB_PROJECT_URL,
+                                        BuildConfig.FB_PROJECT_DB_KEY, mNewDeviceInfo,
+                                        FirebaseAuth.getInstance().getCurrentUser().
+                                                getUid()).start();
+
 
                         }
 
@@ -134,6 +150,11 @@ public class AddNewDeviceStep3Fragment extends Fragment implements View.OnClickL
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.e(TAG, e.getMessage());
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
                         }
                     });
 
@@ -151,15 +172,15 @@ public class AddNewDeviceStep3Fragment extends Fragment implements View.OnClickL
         private DatagramSocket mSoc;
         private byte[] mData;
 
-        public SenderUDPServer(String projectUrl, String authToken, DeviceHolder deviceHolder, String deviceUID){
+        public SenderUDPServer(String projectUrl, String authToken, DeviceHolder deviceHolder, String userUID){
             try {
-                mSoc = new DatagramSocket(18266);
+                mSoc = new DatagramSocket(18277);
 
                 JSONObject sendData = new JSONObject();
                 sendData.put("FB_HOST_URL", projectUrl);
                 sendData.put("FB_AUTH_KEY", authToken);
-                sendData.put("USER_UID", deviceUID);
-                sendData.put("LISTEN_URL", "/"+deviceUID+"/areas/"+deviceHolder.getDeviceAreaRoom()+"/"+deviceHolder.getDeviceName());
+                sendData.put("USER_UID", userUID);
+                sendData.put("LISTEN_URL", "/"+userUID+"/devices/"+deviceHolder.getDeviceName());
                 sendData.put("LISTEN_NODE", "deviceState");
                 sendData.put("LED_NUM", 2);
                 mData = new byte[sendData.length()];

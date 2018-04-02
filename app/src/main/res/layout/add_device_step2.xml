@@ -102,7 +102,8 @@
                     android:layout_marginTop="20dip"
                     android:background="@color/colorAccent"
                     android:text="@string/add_device_configure"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:fontFamily="sans-serif"/>
 
             </LinearLayout>
 

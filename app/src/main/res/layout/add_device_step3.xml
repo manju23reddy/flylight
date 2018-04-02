@@ -1,61 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorPrimary">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/step_4_name"
         android:gravity="center"
-        android:fontFamily="sans-serif"
         android:layout_margin="10dp"
+        android:fontFamily="sans-serif"
+        android:textSize="20sp"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lyt_router_logo"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/add_device_step4_device_image"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:id="@+id/imgv_device_"/>
+        android:text="@string/device_name_step_4_msg"/>
 
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/camera"
-                android:layout_gravity="bottom|end"
-                android:id="@+id/imgv_camera"/>
-
-        </FrameLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true">
 
             <EditText
                 android:id="@+id/edtxt_device_name"
@@ -69,37 +35,25 @@
                 android:textColorHint="@android:color/white"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edtxt_device_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="@string/add_device_step4_device_description"
-                android:inputType="text"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:maxLines="4"/>
-        </android.support.design.widget.TextInputLayout>
 
 
         <Button
             android:id="@+id/btn_configure_device"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
+            android:layout_margin="10dip"
             android:background="@color/colorAccent"
             android:text="@string/add_device_configure"
+            android:fontFamily="sans-serif"
+            android:layout_alignParentBottom="true"
             android:textColor="@android:color/black" />
 
-    </LinearLayout>
 
 
 
 
 
 
-</LinearLayout>
+
+</RelativeLayout>

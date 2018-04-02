@@ -11,53 +11,79 @@ import java.util.ArrayList;
 
 public class RoomHolder implements Parcelable{
 
-    private String areaName;
-    private String areaDesc;
-    ArrayList<String> linkedDevices;
+    //private String key;
+    private String areaname;
+    private String areadesc;
+    ArrayList<String> linkeddevices;
+    boolean turnonalldevices;
 
 
     public RoomHolder(){
-        linkedDevices = new ArrayList<>();
+        linkeddevices = new ArrayList<>();
     }
 
     public RoomHolder(Parcel in){
-        areaName = in.readString();
-        areaDesc = in.readString();
-        linkedDevices = new ArrayList<>();
-        in.readStringList(linkedDevices);
+        //key = in.readString();
+        areaname = in.readString();
+        areadesc = in.readString();
+        linkeddevices = new ArrayList<>();
+        in.readStringList(linkeddevices);
+        turnonalldevices = in.readInt() == 0 ? false : true;
 
     }
 
-    public RoomHolder(String aAreaName, String aADesc, ArrayList<String> linkedDevices){
-        this.areaName = aAreaName;
-        this.areaDesc = aADesc;
-        this.linkedDevices = linkedDevices;
+    public RoomHolder(String aAreaName, String aADesc, ArrayList<String> linkedDevices, boolean turnAll){
+        //this.key = "";
+        this.areaname = aAreaName;
+        this.areadesc = aADesc;
+        this.linkeddevices = linkedDevices;
+        turnonalldevices = turnAll;
+    }
+
+    /*
+    public RoomHolder(String aKey, String aAreaName, String aADesc, ArrayList<String> linkedDevices){
+        this.key = aKey;
+        this.areaname = aAreaName;
+        this.areadesc = aADesc;
+        this.linkeddevices = linkedDevices;
+    }*/
+
+    public void setAllOn(boolean allOn){
+        this.turnonalldevices = allOn;
+    }
+   // public void setkey(String aKey){ this.key = aKey; }
+
+    public void setareaname(String aName){
+        this.areaname = aName;
+    }
+
+    public void setaresdesc(String aDesc){
+        this.areadesc = aDesc;
+    }
+
+    public void setLinkeddevices(ArrayList<String> aLinkedDevices){
+        this.linkeddevices = aLinkedDevices;
     }
 
 
-    public void setAreaName(String aName){
-        this.areaName = aName;
+
+
+    public String getareaname(){
+        return this.areaname;
     }
 
-    public void setAreaDesc(String aDesc){
-        this.areaDesc = aDesc;
+    public String getareadesc(){
+        return this.areadesc;
     }
 
-    public void addLinkedDevicesToRoom(String aLinkedDevices){
-        this.linkedDevices.add(aLinkedDevices);
+    public ArrayList<String> getlinkeddevices(){
+        return this.linkeddevices;
     }
 
+    //public String getkey(){ return this.key; }
 
-    public String getAreaName(){
-        return this.areaName;
-    }
-
-    public String getAreaDesc(){
-        return this.areaDesc;
-    }
-
-    public ArrayList<String> getLinkedDevices(){
-        return this.linkedDevices;
+    public boolean getAllOn(){
+        return this.turnonalldevices;
     }
 
 
@@ -68,9 +94,12 @@ public class RoomHolder implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(this.areaName);
-        parcel.writeString(this.areaDesc);
-        parcel.writeStringList(this.linkedDevices);
+       // parcel.writeString(this.key);
+        parcel.writeString(this.areaname);
+        parcel.writeString(this.areadesc);
+        parcel.writeStringList(this.linkeddevices);
+        int state = this.turnonalldevices == true ? 1 : 0;
+        parcel.writeInt( state);
     }
 
     public static final Creator<RoomHolder> CREATOR = new ClassLoaderCreator<RoomHolder>() {

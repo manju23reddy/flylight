@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
+                android:fontFamily="sans-serif"
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
@@ -76,7 +77,8 @@
             android:layout_marginTop="20dip"
             android:background="@color/colorAccent"
             android:text="@string/btn_login"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif"/>
 
         <Button
             android:id="@+id/btn_reset_password"
@@ -86,7 +88,8 @@
             android:background="@null"
             android:text="@string/btn_forgot_password"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:fontFamily="sans-serif"/>
 
         <!-- Link to Login Screen -->
 
@@ -99,6 +102,7 @@
             android:text="@string/btn_link_to_register"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:fontFamily="sans-serif"
             android:textSize="15dp" />
     </LinearLayout>
 

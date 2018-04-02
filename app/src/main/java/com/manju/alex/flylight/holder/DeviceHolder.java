@@ -3,69 +3,76 @@ package com.manju.alex.flylight.holder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by mreddy3 on 3/27/2018.
  */
 
 public class DeviceHolder implements Parcelable{
 
-    private String deviceName;
-    private String deviceAreaRoom;
-    private int deviceIntensity;
-    private int deviceState;
+    private String devicename;
+    private ArrayList<String> linkedrooms;
+    private int deviceintensity;
+    private int devicestate;
 
 
     public DeviceHolder(){
-
+        linkedrooms = new ArrayList<>();
     }
 
     public DeviceHolder(Parcel in){
-        deviceName = in.readString();
-        deviceAreaRoom = in.readString();
-        deviceState = in.readInt();
-        deviceIntensity = in.readInt();
+        devicename = in.readString();
+        in.readStringList(linkedrooms);
+        devicestate = in.readInt();
+        deviceintensity = in.readInt();
     }
 
-    public DeviceHolder(String aDName, String aDDesc, int aDState, int aDIntensity){
-        this.deviceName = aDName;
-        this.deviceAreaRoom = aDDesc;
-        this.deviceState = aDState;
-        this.deviceIntensity = aDIntensity;
+    public DeviceHolder(String aDName, ArrayList<String> aRooms, int aDState,
+                        int aDIntensity){
+
+        this.devicename = aDName;
+        this.linkedrooms = aRooms;
+        this.devicestate = aDState;
+        this.deviceintensity = aDIntensity;
     }
 
 
     public void setDeviceName(String aDName){
-        this.deviceName = aDName;
+        this.devicename = aDName;
     }
 
-    public void setDeviceAreaRoom(String aDDesc){
-        this.deviceAreaRoom = aDDesc;
+    public void addAreaRoomToDevice(String aAreaRoom){
+        this.linkedrooms.add(aAreaRoom);
     }
 
     public void setDeviceState(int aDDState){
-        this.deviceState = aDDState;
+        this.devicestate = aDDState;
     }
 
     public void setDeviceIntensity(int aDintensity){
-        this.deviceIntensity = aDintensity;
+        this.deviceintensity = aDintensity;
+    }
+
+    public void setLinkedRoomsList(ArrayList<String> mRoomsList){
+        this.linkedrooms = mRoomsList;
     }
 
     public String getDeviceName(){
-        return this.deviceName;
+        return this.devicename;
     }
 
-    public String getDeviceAreaRoom(){
-        return this.deviceAreaRoom;
+    public ArrayList<String> getLinkedRooms(){
+        return this.linkedrooms;
     }
 
     public int getDeviceState(){
-        return this.deviceState;
+        return this.devicestate;
     }
 
     public int getDeviceIntensity(){
-        return this.deviceIntensity;
+        return this.deviceintensity;
     }
-
 
     @Override
     public int describeContents() {
@@ -74,10 +81,10 @@ public class DeviceHolder implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(this.deviceName);
-        parcel.writeString(this.deviceAreaRoom);
-        parcel.writeInt(this.deviceState);
-        parcel.writeInt(this.deviceIntensity);
+        parcel.writeString(this.devicename);
+        parcel.writeStringList(this.linkedrooms);
+        parcel.writeInt(this.devicestate);
+        parcel.writeInt(this.deviceintensity);
     }
 
     public static final Parcelable.Creator<DeviceHolder> CREATOR = new ClassLoaderCreator<DeviceHolder>() {

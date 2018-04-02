@@ -2,6 +2,8 @@ package com.manju.alex.flylight.ui;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,69 +21,46 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.manju.alex.flylight.R;
+import com.manju.alex.flylight.ui.mainui.IMainScreenContract;
+import com.manju.alex.flylight.ui.mainui.MainFragmentViewPagerAdapter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FlyLightMainActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth = null;
+    final String TAG = FlyLightMainActivity.class.getSimpleName();
 
-    Button mSignOut = null;
+    final int[] mTab_Icons = new int[]{R.drawable.areas_tabs, R.drawable.ic_action_name};
 
-    FloatingActionButton mAddNewDeviceBtn = null;
+    @BindView(R.id.vpager_pages)
+    ViewPager mMainScreenViewPager;
 
-    DatabaseReference mRoomsRef;
-
-
-
+    @BindView(R.id.tab_pages)
+    TabLayout mMainScreenTabLyt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fly_light_main);
 
-        mAuth = FirebaseAuth.getInstance();
+        ButterKnife.bind(this);
 
-        mSignOut = findViewById(R.id.btn_signout);
+        initViews();
 
-        mAddNewDeviceBtn = findViewById(R.id.fab_btn_add_new_device);
-        mAddNewDeviceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent addNewDevicePage = new Intent(getApplicationContext(), AddNewDeviceActivity.class);
-                startActivity(addNewDevicePage);
-            }
-        });
-        mSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                Intent signInActivity = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(signInActivity);
-                finish();
+    }
 
-            }
-        });
+    public void initViews(){
+        MainFragmentViewPagerAdapter adapter = new MainFragmentViewPagerAdapter(this,
+                getSupportFragmentManager());
 
-        /*
-        mRoomsRef = FirebaseDatabase.getInstance().getReference();
-        Log.d("data", mRoomsRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("areas").toString());
+        mMainScreenViewPager.setAdapter(adapter);
 
-               Log.d("User ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-        Query ref = mRoomsRef.child("oszfd1JNxNcQfEzR9xFBEwNN99r1").child("areas");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("data2", dataSnapshot.toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-
-
+        mMainScreenTabLyt.setupWithViewPager(mMainScreenViewPager);
+        mMainScreenTabLyt.getTabAt(IMainScreenContract.ROOMS_FRAGMENT).
+                setIcon(mTab_Icons[IMainScreenContract.ROOMS_FRAGMENT]);
+        mMainScreenTabLyt.getTabAt(IMainScreenContract.DEVICES_FRAGMENT).
+                setIcon(mTab_Icons[IMainScreenContract.DEVICES_FRAGMENT]);
 
     }
 }

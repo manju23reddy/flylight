@@ -20,10 +20,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.manju.alex.flylight.R;
+import com.manju.alex.flylight.adapters.AreaListAdapter;
 import com.manju.alex.flylight.holder.RoomHolder;
 import com.manju.alex.flylight.util.FlyLightUtilConstants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,8 +61,6 @@ public class AddNewAreaActivity extends AppCompatActivity implements View.OnClic
 
     private DatabaseReference mDataBase;
 
-    private String mAreaName = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +88,6 @@ public class AddNewAreaActivity extends AppCompatActivity implements View.OnClic
 
                 String roomName = mAreaNameEdt.getText().toString();
                 String roomDesc = mAreaDescEdt.getText().toString();
-                mAreaName = roomName;
                 if(TextUtils.isEmpty(roomName)){
                     Toast.makeText(getApplicationContext(), getString(R.string.empty_area_nam_err),
                             Toast.LENGTH_LONG).show();
@@ -107,7 +107,7 @@ public class AddNewAreaActivity extends AppCompatActivity implements View.OnClic
             case R.id.btn_add_device_step:
                 Intent device_add_steps = new Intent(getApplicationContext(), AddNewDeviceActivity.class);
                 Bundle data = new Bundle();
-                data.putString(FlyLightUtilConstants.KEY_AREA_NAME, mAreaName);
+                data.putString(FlyLightUtilConstants.KEY_AREA_NAME, mDataBase.getKey());
                 device_add_steps.putExtras(data);
                 startActivity(device_add_steps);
                 finish();
@@ -120,9 +120,12 @@ public class AddNewAreaActivity extends AppCompatActivity implements View.OnClic
 
     private void saveNewRoomToFireBase(String roomName, String roomDesc){
         try{
-            RoomHolder room = new RoomHolder(roomName, roomDesc, new ArrayList<String>());
+            RoomHolder area = new RoomHolder(roomName, roomDesc, new ArrayList<String>(), false);
+
+
+
             mDataBase.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
-                    child(getString(R.string.tab_areas).toLowerCase()).child(roomName).setValue(room).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    child(getString(R.string.tab_areas).toLowerCase()).child(roomName).setValue(area).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     mAddAreaDescTxtv.setText(getString(R.string.link_device_to_room_msg));

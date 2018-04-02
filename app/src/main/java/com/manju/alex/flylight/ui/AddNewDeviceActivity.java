@@ -34,7 +34,7 @@ public class AddNewDeviceActivity extends AppCompatActivity implements IAddDevic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_device);
-
+        getSupportActionBar().setTitle(getString(R.string.add_device_title));
         initUI();
 
     }
